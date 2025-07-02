@@ -1,0 +1,58 @@
+:host {
+  --spacing: 0.25rem;
+
+  input {
+    width: 100%;
+    padding: var(--spacing);
+    margin-bottom: 1rem;
+  }
+
+  .repo-tile {
+    display: block;
+    margin-bottom: var(--spacing);
+    padding-bottom: var(--spacing);
+    cursor: pointer;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #ccc;
+    }
+
+    &.active {
+      background: #ccc;
+    }
+  }
+}
+
+.desktop-layout {
+  display: flex;
+  height: 100%;
+
+  .sidebar {
+    width: 35%;
+    max-width: 400px;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+    padding-right: 1rem;
+    box-sizing: border-box;
+  }
+
+  .detail {
+    flex: 1;
+    overflow-y: auto;
+    padding-left: 1rem;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 767px) {
+  .desktop-layout {
+    display: block;
+
+    .sidebar,
+    .detail {
+      width: 100%;
+      padding: 0;
+      border: none;
+    }
+  }
+}

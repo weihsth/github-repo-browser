@@ -1,0 +1,39 @@
+<input type="text"
+       placeholder="Search GitHub repos..."
+       [value]="input()"
+       (input)="onInput($event)"/>
+
+<ng-template #repoTile let-repo>
+  <strong>{{ repo.full_name }}</strong><br>
+  ⭐ {{ repo.stargazers_count }} | 🍴 {{ repo.forks_count }}
+</ng-template>
+
+@if (screen.isMobile()) {
+  @for (repo of facade.results$(); track repo.id) {
+    <a [routerLink]="['/repo', repo.full_name]" class="repo-tile">
+      <ng-container *ngTemplateOutlet="repoTile; context: { $implicit: repo }"/>
+    </a>
+  }
+} @else {
+  <div class="desktop-layout">
+    <div class="sidebar">
+      @for (repo of facade.results$(); track repo.id) {
+        <div class="repo-tile"
+             (click)="selected.set(repo)"
+             [class.active]="repo === selected()">
+          <ng-container *ngTemplateOutlet="repoTile; context: { $implicit: repo }"/>
+        </div>
+      }
+    </div>
+
+    <div class="detail">
+      @if (selected()) {
+        <app-repo-detail [fullName]="selected()!.full_name"/>
+      }
+    </div>
+  </div>
+}
+
+@if (facade.isLoading$()) {
+  <p>Weitere Repos werden geladen…</p>
+}

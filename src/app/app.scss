@@ -1,0 +1,13 @@
+header {
+  padding-top: calc(1rem + env(safe-area-inset-top));
+  padding-bottom: 1rem;
+  background-color: #222;
+  color: white;
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+}
+
+main {
+  padding: 1rem 1rem var(--safe-bottom, 1rem);
+}

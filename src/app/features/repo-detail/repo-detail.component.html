@@ -1,0 +1,19 @@
+@if (facade.isLoading()) {
+  <p>Lade Repo Details...</p>
+} @else {
+  @if (screen.isMobile()) {
+    <a [routerLink]="['/',]">
+      Zurück zur Übersicht
+    </a>
+  }
+  @if (facade.repo(); as repo) {
+    <h2>{{ repo.full_name }}</h2>
+    <p>{{ repo.description }}</p>
+    <p>⭐ {{ repo.stargazers_count }} | 🍴 {{ repo.forks_count }}</p>
+    <h3>Readme:</h3>
+    <hr>
+    <div [innerHTML]="facade.readmeHtml()"></div>
+  } @else {
+    <p>Keine Details gefunden.</p>
+  }
+}

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { App as CapacitorApp } from '@capacitor/app';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,23 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.scss'
 })
 export class App {
-  protected title = 'github-repo-browser';
+
+  protected header = 'GitHub Repo Browser';
+
+  private readonly router = inject(Router);
+
+  constructor() {
+    this.initDeepLinks();
+  }
+
+  private initDeepLinks() {
+    CapacitorApp.addListener('appUrlOpen', ({ url }: {url: string}) => {
+      const parsed = new URL(url);
+      const path = parsed.pathname;
+
+      if (path.startsWith('/repo/')) {
+        this.router.navigateByUrl(path);
+      }
+    });
+  }
 }
