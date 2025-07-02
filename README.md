@@ -18,9 +18,11 @@ Complete time was a bit mor than 2 hours, but definitely I wanted to get the uni
 
 Clean Angular/Capacitor setup generated with CLI (see below starting with #Development server).
 
-I added:
-./src/app/core
-./src/app/features
+I added following folders:
+- ./src/app/core/interfaces
+- ./src/app/core/services
+- ./src/app/features/repo-detail
+- ./src/app/features/search
 
 ### Layout
 
